@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MdxContent } from "@/components/blog/MdxContent";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
+import { buildArticle } from "@/lib/jsonld";
 import { formatDate } from "@/lib/utils";
 import { site } from "@/data/site";
 
@@ -51,6 +53,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="py-16 md:py-24">
+      <JsonLd data={buildArticle(post)} />
       <div className="section-shell max-w-3xl">
         <Link href="/blog" className="text-sm font-semibold underline underline-offset-4">
           Back to blog

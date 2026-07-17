@@ -1,0 +1,195 @@
+---
+title: "Knowledge Representation Explained from Scratch"
+description: "How computers turn facts, rules, and relationships into knowledge they can store, reason about, and use."
+date: "2026-07-18"
+tags: ["Artificial Intelligence", "Computer Science", "Knowledge Representation"]
+---
+
+When people begin learning artificial intelligence, they often jump straight to machine learning, neural networks, or agents.
+
+But there is a more basic question underneath all of them:
+
+**How does a computer store what it knows about the world?**
+
+Humans carry knowledge through experience, language, memory, and intuition. Computers do not have that background. They need information to be written in a structure they can process.
+
+That is the purpose of knowledge representation.
+
+## Knowledge is more than raw data
+
+Suppose a patient's temperature is `38°C`.
+
+That number is data.
+
+Saying the patient has a fever turns the data into information.
+
+Knowing that a fever may indicate an infection—and that other symptoms should be checked—makes the information useful for reasoning and action.
+
+This gives us a simple progression:
+
+- **Data:** `38°C`
+- **Information:** The patient has a fever
+- **Knowledge:** A fever may indicate illness, so investigate further
+
+Knowledge connects facts with meaning. It helps us make decisions, explain situations, and predict what might happen next.
+
+## Representation creates a usable model
+
+A representation is a structured substitute for something in the real world.
+
+A map represents roads and locations. Sheet music represents a song. A blueprint represents a building that may not exist yet.
+
+None of these representations is the real object. Each one preserves the details needed for a particular task.
+
+Computers work the same way. They cannot store the world itself, so we create models using symbols, facts, rules, objects, and relationships.
+
+## What is knowledge representation?
+
+Knowledge representation is the process of encoding knowledge in a form a computer can store, examine, and reason about.
+
+Consider two statements:
+
+- Socrates is a human
+- All humans are mortal
+
+A reasoning system can combine them to reach a new conclusion:
+
+- Socrates is mortal
+
+The conclusion was not stored as a separate fact. The computer produced it by applying a rule to existing knowledge.
+
+This process is called **inference**.
+
+The stored facts and rules form a **knowledge base**, while the mechanism that applies those rules is often called an **inference engine**.
+
+## Why computers need explicit structure
+
+People regularly leave important details unstated.
+
+If someone says, “It is raining,” you may decide to carry an umbrella. Your decision uses background knowledge:
+
+- Rain makes things wet
+- An umbrella protects you from rain
+- You are about to go outside
+
+A computer does not automatically share those assumptions. The relevant facts and relationships must be represented, learned, or supplied through context.
+
+This is one of the central problems in AI. The real world is ambiguous, incomplete, and constantly changing, while computers work best with clear structures.
+
+Knowledge representation builds a bridge between those two environments.
+
+## Common ways to represent knowledge
+
+Different problems need different representations. There is no single format that works best everywhere.
+
+### Logical statements
+
+Logic represents knowledge through statements that can be true or false.
+
+Propositional logic works with complete statements such as:
+
+- It is raining
+- The road is wet
+
+Predicate logic can describe objects, properties, and relationships:
+
+- `Human(Socrates)`
+- `Mortal(Socrates)`
+
+Logic is precise and supports formal reasoning, but representing uncertain or incomplete knowledge can be difficult.
+
+### Rules
+
+Rule-based systems store knowledge as conditions and actions:
+
+`IF a person has a fever AND a cough, THEN investigate a respiratory infection.`
+
+Expert systems often use this structure because each conclusion can be traced back to the rule that produced it.
+
+### Semantic networks
+
+A semantic network represents concepts as nodes and relationships as edges.
+
+For example:
+
+- Pakistan → is a → country
+- Islamabad → capital of → Pakistan
+- Maaz → lives in → Pakistan
+
+This structure makes relationships visible and easy to navigate.
+
+### Frames and objects
+
+Frames group related properties together.
+
+A `Car` frame might contain:
+
+- Manufacturer
+- Model
+- Color
+- Owner
+- Registration number
+
+This is similar to representing an entity with an object, record, or database row.
+
+### Ontologies and knowledge graphs
+
+An ontology defines the concepts and relationships that exist within a domain. A knowledge graph uses those definitions to connect real entities.
+
+Search engines, recommendation systems, enterprise tools, and AI applications use knowledge graphs to connect information from different sources.
+
+## Knowledge representation in everyday software
+
+The idea is not limited to academic AI.
+
+You interact with represented knowledge frequently:
+
+- A navigation system models roads as a graph
+- A calendar stores events, times, people, and relationships
+- A contact list represents people and their details
+- A chess engine represents the board, pieces, and legal moves
+- A medical system connects symptoms, conditions, and treatments
+
+In every case, the chosen representation determines what the software can do efficiently.
+
+A road network represented as a graph makes route-finding practical. The same data stored as an unstructured paragraph would be almost useless to a navigation algorithm.
+
+## How it differs from machine learning
+
+Traditional knowledge representation makes knowledge explicit. Developers or domain experts define the facts, categories, and rules.
+
+Machine learning takes a different approach. It learns patterns from examples rather than relying entirely on hand-written rules.
+
+Neither approach solves every problem.
+
+Explicit knowledge can be easier to inspect, explain, and control. Learned models can handle patterns that would be difficult to describe with thousands of rules.
+
+Modern AI systems increasingly combine both ideas. A language model may generate or interpret text while a knowledge graph, database, or retrieval system supplies reliable domain information.
+
+## The representation shapes the solution
+
+One lesson appears repeatedly in computer science: choosing the right representation can make a difficult problem much easier.
+
+If locations and roads are represented as a graph, route planning becomes a graph-search problem.
+
+If scheduling constraints are represented logically, a solver can test possible assignments.
+
+If expertise is represented as rules, an inference engine can explain which rules produced its recommendation.
+
+The algorithm matters, but the structure given to that algorithm matters just as much.
+
+## Key takeaways
+
+- Knowledge is information connected to meaning and action
+- Representation encodes part of the world in a usable structure
+- A knowledge base stores facts, rules, and relationships
+- Inference produces new conclusions from existing knowledge
+- Common representations include logic, rules, semantic networks, frames, ontologies, and knowledge graphs
+- The right representation depends on the problem being solved
+- Knowledge representation still matters alongside machine learning and modern AI
+
+Knowledge representation is not about making a computer think exactly like a human.
+
+It is about giving the computer a structured model of the world—clear enough to store, query, and reason over.
+
+Once that idea makes sense, topics such as propositional logic, predicate logic, search, expert systems, and knowledge graphs become much easier to understand.

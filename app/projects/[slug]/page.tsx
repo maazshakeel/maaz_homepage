@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildCreativeWork } from "@/lib/jsonld";
 import { getAllProjectSlugs, getProjectBySlug } from "@/lib/projects";
 import { site } from "@/data/site";
 
@@ -50,6 +52,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <article className="py-16 md:py-24">
+      <JsonLd data={buildCreativeWork(project)} />
       <div className="section-shell max-w-4xl">
         <Link
           href="/#portfolio"
