@@ -38,7 +38,7 @@ export const site = {
   name: "Muhammad Maaz",
   title: "Muhammad Maaz — Software Engineer",
   description:
-    "Software Engineer specializing in full-stack development, AI, system design, networking, and cybersecurity. Passionate about building scalable products and sharing knowledge.",
+    "Full-stack software engineer building scalable web and mobile products with React, Next.js, Node.js, and TypeScript.",
   // Prefer NEXT_PUBLIC_SITE_URL in production (e.g. your Vercel domain). Falls back for local/dev.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   email: "maaz.shakeel.bodla@gmail.com",

@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/maazwebsitesocialshare.webp",
-        width: 1734,
-        height: 907,
+        url: "/maazwebsitesocialshare.jpg",
+        width: 1200,
+        height: 630,
         alt: `${site.name} — Software Engineer`,
       },
     ],
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/maazwebsitesocialshare.webp"],
+    images: ["/maazwebsitesocialshare.jpg"],
   },
   robots: {
     index: true,
