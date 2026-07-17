@@ -15,25 +15,32 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.url);
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(siteUrl),
   title: {
     default: site.title,
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: site.title,
     description: site.description,
-    url: site.url,
+    url: siteUrl,
     siteName: site.name,
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/maazwebsitesocialshare.png",
-        width: 1731,
-        height: 909,
+        url: "/maazwebsitesocialshare.webp",
+        width: 1734,
+        height: 907,
         alt: `${site.name} — Software Engineer`,
       },
     ],
@@ -42,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/maazwebsitesocialshare.png"],
+    images: ["/maazwebsitesocialshare.webp"],
   },
   robots: {
     index: true,
@@ -58,8 +65,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} h-full`}>
       <body className="min-h-full">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

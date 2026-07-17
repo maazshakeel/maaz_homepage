@@ -16,7 +16,7 @@ export type Project = {
   overview: string;
   highlights: string[];
   tags: string[];
-  href: string;
+  href?: string;
   image?: string;
   role?: string;
   year?: string;
@@ -39,7 +39,8 @@ export const site = {
   title: "Muhammad Maaz — Software Engineer",
   description:
     "Software Engineer specializing in full-stack development, AI, system design, networking, and cybersecurity. Passionate about building scalable products and sharing knowledge.",
-  url: "https://maaz.dev", // Update when your portfolio is live
+  // Prefer NEXT_PUBLIC_SITE_URL in production (e.g. your Vercel domain). Falls back for local/dev.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   email: "maaz.shakeel.bodla@gmail.com",
   resume: "/MaazResume.pdf",
 
@@ -83,8 +84,8 @@ export const site = {
         description: "Master computer science fundamentals and never stop learning.",
       },
       {
-        label: "Research",
-        description: "Understand systems deeply before building solutions.",
+        label: "Innovate",
+        description: "Explore better ways to solve problems and improve products.",
       },
       {
         label: "Build",
@@ -102,6 +103,21 @@ export const site = {
     "System Design",
     "AI Integration",
     "Technical Consulting",
+  ],
+
+  skills: [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "React Native",
+    "Node.js",
+    "Express",
+    "Prisma",
+    "PostgreSQL",
+    "Tailwind CSS",
+    "REST APIs",
+    "System Design",
+    "Git",
   ],
 
   projects: [
@@ -123,8 +139,7 @@ export const site = {
       href: "https://github.com/maazshakeel/complaint-software",
       role: "Full-stack developer",
       year: "2025",
-      image: "/projects/complaint-system.png"
-
+      image: "/projects/complaint-system.webp",
     },
     {
       slug: "efficient-track",
@@ -141,16 +156,15 @@ export const site = {
         "Modular architecture for future feature expansion",
       ],
       tags: ["React", "Node.js", "TypeScript"],
-      href: "https://github.com/maazshakeel/efficient-track",
       role: "Full-stack developer",
       year: "2025",
-      image: "/projects/efficient-track.png",
+      image: "/projects/efficient-track.webp",
     },
     {
       slug: "museum-jawa",
       title: "Museum Jawa",
       description:
-        "MuseumJava is a website where you can explore and learn about indonesian island: Java culture, With a very beautiful and highly interacity user experience.",
+        "An interactive website to explore and learn about Indonesian Java culture, with a beautiful and highly interactive user experience.",
       overview:
         "Museum Jawa is an interactive cultural website focused on the heritage, traditions, and stories of Java. The experience combines rich visuals, smooth navigation, and educational content to make Indonesian culture feel engaging and accessible to a global audience.",
       highlights: [
@@ -162,7 +176,7 @@ export const site = {
       ],
       tags: ["React.js", "JavaScript", "TailwindCSS"],
       href: "https://museumjava.vercel.app/",
-      image: "/projects/museumjawa.png",
+      image: "/projects/museumjawa.webp",
       role: "Frontend developer",
       year: "2025",
     },

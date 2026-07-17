@@ -15,7 +15,7 @@ export function About() {
             />
             <div className="relative h-full overflow-hidden rounded-[1.5rem] border border-border bg-ink shadow-[4px_4px_0_var(--shadow)]">
               <Image
-                src="/hero/maaz.png"
+                  src="/hero/maaz.webp"
                 alt={`Portrait of ${site.name}`}
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"

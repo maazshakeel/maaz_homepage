@@ -24,14 +24,14 @@ export function Skills() {
             <div className="absolute right-6 top-6 rounded-full border border-foreground/20 p-2">
               <SparkIcon />
             </div>
-            <h3 className="text-2xl font-bold">Fields</h3>
+            <h3 className="text-2xl font-bold">Skills</h3>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {site.services.map((service) => (
+              {site.skills.map((skill) => (
                 <li
-                  key={service}
+                  key={skill}
                   className="rounded-xl border border-foreground/12 bg-accent-soft/55 px-4 py-3 text-sm font-medium"
                 >
-                  {service}
+                  {skill}
                 </li>
               ))}
             </ul>

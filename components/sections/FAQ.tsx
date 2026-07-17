@@ -14,14 +14,18 @@ export function FAQ() {
       <div className="space-y-4">
         {site.faq.map((item, index) => {
           const isOpen = openIndex === index;
+          const panelId = `faq-panel-${index}`;
+          const buttonId = `faq-button-${index}`;
 
           return (
             <Reveal key={item.question} delay={index * 80}>
               <div className="sketch-card overflow-hidden">
                 <button
+                  id={buttonId}
                   type="button"
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
                   <span className="font-semibold">{item.question}</span>
@@ -36,7 +40,12 @@ export function FAQ() {
                   </span>
                 </button>
                 {isOpen ? (
-                  <div className="border-t border-border px-6 py-5 text-sm leading-7 text-muted">
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    className="border-t border-border px-6 py-5 text-sm leading-7 text-muted"
+                  >
                     {item.answer}
                   </div>
                 ) : null}

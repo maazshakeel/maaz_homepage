@@ -3,32 +3,33 @@ import { HeroPortraitStage } from "@/components/hero/HeroPortraitStage";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/data/site";
 
-const pillars = [
-  {
-    label: "Learn",
-    description: site.hero.pillars[0].description,
-    src: "/hero/learn.svg",
-    colorSrc: "/hero/color_learn.png",
-    width: 96,
-    height: 94,
-  },
-  {
-    label: "Innovate",
-    description: site.hero.pillars[1].description,
-    src: "/hero/innovate.svg",
-    colorSrc: "/hero/color_innovate.svg",
-    width: 53,
-    height: 101,
-  },
-  {
-    label: "Build",
-    description: site.hero.pillars[2].description,
+const pillars = site.hero.pillars.map((pillar) => {
+  if (pillar.label === "Learn") {
+    return {
+      ...pillar,
+      src: "/hero/learn.svg",
+      colorSrc: "/hero/color_learn.png",
+      width: 96,
+      height: 94,
+    };
+  }
+  if (pillar.label === "Innovate") {
+    return {
+      ...pillar,
+      src: "/hero/innovate.svg",
+      colorSrc: "/hero/color_innovate.svg",
+      width: 53,
+      height: 101,
+    };
+  }
+  return {
+    ...pillar,
     src: "/hero/build.svg",
     colorSrc: "/hero/color_build.png",
     width: 85,
     height: 79,
-  },
-] as const;
+  };
+});
 
 export function Hero() {
   return (
@@ -55,7 +56,7 @@ export function Hero() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button href={`mailto:${site.email}`} variant="secondary">
-                Hire Me →
+                Discuss a project →
               </Button>
               <Button href="#portfolio" variant="primary">
                 View my work
@@ -73,7 +74,7 @@ export function Hero() {
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted">How I work</p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">
-                Learn. Innovate. Build.
+                {site.hero.pillars.map((pillar) => pillar.label).join(". ")}.
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted sm:text-right">

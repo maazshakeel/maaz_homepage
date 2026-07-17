@@ -43,7 +43,7 @@ export function Projects() {
                   >
                     Details
                   </Link>
-                  {project.href.startsWith("http") ? (
+                  {project.href?.startsWith("http") ? (
                     <a
                       href={project.href}
                       target="_blank"
@@ -52,7 +52,9 @@ export function Projects() {
                     >
                       View project
                     </a>
-                  ) : null}
+                  ) : (
+                    <span className="text-sm font-medium text-muted/70">View project — coming soon</span>
+                  )}
                 </div>
               </article>
             </Reveal>

@@ -33,7 +33,7 @@ export function HeroPortraitStage() {
 
       <div className="hero-portrait-photo">
         <Image
-          src="/hero/maaz.png"
+          src="/hero/maaz.webp"
           alt={`Portrait of ${site.name}`}
           width={1023}
           height={1537}

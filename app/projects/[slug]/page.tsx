@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const isExternal = project.href.startsWith("http");
+  const isExternal = Boolean(project.href?.startsWith("http"));
 
   return (
     <article className="py-16 md:py-24">
@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {isExternal ? (
+            {isExternal && project.href ? (
               <Button href={project.href} variant="primary" target="_blank" rel="noreferrer">
                 View project →
               </Button>
