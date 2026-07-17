@@ -1,0 +1,32 @@
+---
+title: "Designing a Hand-Drawn Hero Without Losing Performance"
+description: "How to capture a sketch-inspired aesthetic using lightweight SVG and CSS motion."
+date: "2026-07-02"
+tags: ["Design", "Animation", "CSS"]
+---
+
+A hand-drawn hero can give a portfolio personality, but it is easy to overdo motion or ship assets that hurt performance.
+
+## Start with SVG, not heavy media
+
+Line-art icons and portraits work well as inline SVG because they:
+
+- Stay sharp at any size
+- Keep bundle size small
+- Match a monochrome design system cleanly
+
+## Use motion with intent
+
+The goal is not constant movement. A few floating elements with staggered timing are enough to make the hero feel alive.
+
+Helpful rules:
+
+- Respect `prefers-reduced-motion`
+- Animate transform and opacity only
+- Keep durations under one second for entrance effects
+
+## Build a visual system early
+
+When the accent color, border weight, and card style are defined up front, every later section feels cohesive. That is especially important when you are mixing playful illustration with more structured content like pricing or FAQs.
+
+The result should feel personal, but still professional enough for client work.
