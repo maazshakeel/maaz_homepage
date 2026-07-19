@@ -136,10 +136,10 @@ export const site = {
         "REST API backend with structured database models",
       ],
       tags: ["React Native", "Express", "TypeScript", "Prisma"],
-      href: "https://github.com/maazshakeel/complaint-software",
       role: "Full-stack developer",
       year: "2025",
       image: "/projects/complaint-system.webp",
+      href: "https://sortit-landing-page.vercel.app"
     },
     {
       slug: "efficient-track",
