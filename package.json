@@ -9,13 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@keystatic/core": "^0.6.2",
+    "@keystatic/next": "^5.0.4",
+    "@markdoc/markdoc": "^0.5.8",
     "@vercel/analytics": "^2.0.1",
-    "gray-matter": "^4.0.3",
     "next": "16.2.10",
-    "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "remark-gfm": "^4.0.1"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MdxContent } from "@/components/blog/MdxContent";
+import { MarkdocContent } from "@/components/blog/MarkdocContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { buildArticle } from "@/lib/jsonld";
@@ -13,14 +13,15 @@ type BlogPostPageProps = {
 };
 
 export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {};
@@ -34,18 +35,20 @@ export async function generateMetadata({
       description: post.description,
       type: "article",
       publishedTime: post.date,
+      ...(post.cover ? { images: [post.cover] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      ...(post.cover ? { images: [post.cover] } : {}),
     },
   };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -78,7 +81,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </header>
 
         <div className="mt-10 border-t border-border pt-10">
-          <MdxContent source={post.content} />
+          <MarkdocContent contentNode={post.contentNode} />
         </div>
 
         <footer className="mt-12 border-t border-border pt-8 text-sm text-muted">

@@ -1,8 +1,7 @@
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "@/keystatic.config";
 
-const postsDirectory = path.join(process.cwd(), "content/blog");
+const reader = createReader(process.cwd(), keystaticConfig);
 
 export type BlogPostMeta = {
   slug: string;
@@ -11,64 +10,95 @@ export type BlogPostMeta = {
   date: string;
   readingTime: string;
   tags: string[];
+  cover?: string | null;
 };
 
 export type BlogPost = BlogPostMeta & {
-  content: string;
+  // Markdoc AST node from Keystatic — rendered by MarkdocContent
+  contentNode: unknown;
 };
 
-function getReadingTime(content: string) {
-  const words = content.trim().split(/\s+/).length;
+function collectText(node: unknown): string {
+  if (!node || typeof node !== "object") {
+    return "";
+  }
+
+  const record = node as {
+    type?: string;
+    attributes?: { content?: string };
+    children?: unknown[];
+  };
+
+  if (record.type === "text" && typeof record.attributes?.content === "string") {
+    return record.attributes.content;
+  }
+
+  if (!Array.isArray(record.children)) {
+    return "";
+  }
+
+  return record.children.map(collectText).join(" ");
+}
+
+function getReadingTimeFromNode(node: unknown) {
+  const words = collectText(node).trim().split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(words / 200));
   return `${minutes} min read`;
 }
 
-export function getAllPosts(): BlogPostMeta[] {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
-      const source = fs.readFileSync(path.join(postsDirectory, file), "utf8");
-      const { data, content } = matter(source);
-
-      return {
-        slug,
-        title: String(data.title ?? slug),
-        description: String(data.description ?? ""),
-        date: String(data.date ?? new Date().toISOString()),
-        readingTime: getReadingTime(content),
-        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-      };
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
-
-export function getPostBySlug(slug: string): BlogPost | null {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-
-  const source = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(source);
-
+function toMeta(
+  slug: string,
+  entry: {
+    title: string;
+    description: string;
+    date: string | null;
+    tags: readonly string[];
+    cover?: string | null;
+  },
+  contentNode: unknown,
+): BlogPostMeta {
   return {
     slug,
-    title: String(data.title ?? slug),
-    description: String(data.description ?? ""),
-    date: String(data.date ?? new Date().toISOString()),
-    readingTime: getReadingTime(content),
-    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    content,
+    title: entry.title,
+    description: entry.description,
+    date: entry.date ?? new Date().toISOString().slice(0, 10),
+    readingTime: getReadingTimeFromNode(contentNode),
+    tags: [...entry.tags],
+    cover: entry.cover ?? null,
   };
 }
 
-export function getAllPostSlugs() {
-  return getAllPosts().map((post) => post.slug);
+export async function getAllPosts(): Promise<BlogPostMeta[]> {
+  const posts = await reader.collections.posts.all();
+
+  const withMeta = await Promise.all(
+    posts.map(async (post) => {
+      const { node } = await post.entry.content();
+      return toMeta(post.slug, post.entry, node);
+    }),
+  );
+
+  return withMeta.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const post = await reader.collections.posts.read(slug);
+
+  if (!post) {
+    return null;
+  }
+
+  const { node } = await post.content();
+  const meta = toMeta(slug, post, node);
+
+  return {
+    ...meta,
+    contentNode: node,
+  };
+}
+
+export async function getAllPostSlugs() {
+  return reader.collections.posts.list();
 }

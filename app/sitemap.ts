@@ -3,8 +3,8 @@ import { getAllPosts } from "@/lib/blog";
 import { getAllProjectSlugs } from "@/lib/projects";
 import { site } from "@/data/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
   const projectSlugs = getAllProjectSlugs();
 
   return [
